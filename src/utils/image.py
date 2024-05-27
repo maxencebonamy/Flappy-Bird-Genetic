@@ -13,4 +13,4 @@ def resize_image_keep_aspect(image_path, target_height):
     
     resized_image = pygame.transform.scale(image, (new_width, target_height))
     
-    return resized_image
+    return resized_image.convert_alpha()

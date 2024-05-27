@@ -4,7 +4,7 @@ import random
 
 class World:
 
-	SPEED = 2
+	SPEED = 1
 	MIN_PIPE_GAP = 200
 	MAX_PIPE_GAP = 500
 	
@@ -35,13 +35,20 @@ class World:
 			pipe.draw(screen)
 	
 	def collide(self, player):
-		for pipe in self.pipes:
+		for pipe in self.pipes[:2]:
 			if pipe.collide(player):
 				return True
 		return False
 
+	def player_passed_pipe(self, player):
+		for pipe in self.pipes:
+			if pipe.x + pipe.width < player.rect.centerx and not pipe.passed:
+				pipe.passed = True
+				return True
+		return False
+
 	def __add_pipe(self):
-		new_pipe = Pipe(self.screen_width, self.screen_height, World.SPEED)
+		new_pipe = Pipe(self.screen_width, self.screen_height, World.SPEED * 2)
 		self.pipes.append(new_pipe)
 	
 	def __get_next_gap(self):

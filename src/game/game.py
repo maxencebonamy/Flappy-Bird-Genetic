@@ -1,6 +1,7 @@
 from game.world import World
 from game.player import Player
 from game.game_state import GameState
+from game.score import Score
 from utils.image import resize_image_keep_aspect
 import pygame
 import sys
@@ -24,6 +25,7 @@ class Game:
 
 		self.world = World(Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT)
 		self.player = Player(Game.SCREEN_HEIGHT, self)
+		self.score = Score(Game.SCREEN_HEIGHT)
 
 		self.state = GameState.IDLE
 	
@@ -45,12 +47,15 @@ class Game:
 			self.player.update()
 			if self.world.collide(self.player):
 				self.game_over()
+			if self.world.player_passed_pipe(self.player):
+				self.score.add(1)
 
 		self.screen.fill((0, 0, 0))
 		self.world.draw(self.screen)
 		self.player.draw(self.screen)
 		if self.state == GameState.GAME_OVER:
 			self.screen.blit(self.game_over_image, self.game_over_rect)
+		self.score.draw(self.screen)
 		pygame.display.flip()
 
 		self.clock.tick(60)

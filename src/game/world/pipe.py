@@ -4,7 +4,7 @@ import pygame
 
 class Pipe:
 
-	GAP = 150
+	GAP = 200
 	IMAGE_PATH = "assets/pipe.png"
 	RESIZE_RATIO = 320 / 512
 
@@ -15,6 +15,7 @@ class Pipe:
 		self.width = self.image_top.get_width()
 		self.height = self.image_top.get_height()
 
+		self.passed = False
 		self.speed = speed
 		self.x = screen_width
 		self.y_top = random.randint(-300, -50)
