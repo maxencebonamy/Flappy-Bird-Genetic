@@ -1,0 +1,1 @@
+from utils.image import resize_image_keep_aspect
