@@ -17,7 +17,10 @@ class Player:
 	
 	def on_key_down(self, key):
 		if key == pygame.K_SPACE:
-			self.y_velocity = Player.JUMP_STRENGTH
+			self.jump()
+
+	def jump(self):
+		self.y_velocity = Player.JUMP_STRENGTH
 
 	def update(self):
 		self.y_velocity += Player.GRAVITY

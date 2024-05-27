@@ -43,6 +43,8 @@ class Game:
 		if self.state == GameState.PLAYING:
 			self.world.update()
 			self.player.update()
+			if self.world.collide(self.player):
+				self.game_over()
 
 		self.screen.fill((0, 0, 0))
 		self.world.draw(self.screen)
