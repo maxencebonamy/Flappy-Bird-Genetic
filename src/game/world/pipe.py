@@ -45,3 +45,6 @@ class Pipe:
 
 	def get_width(self):
 		return self.__width
+
+	def get_gap_center_y(self):
+		return self.__y_top + self.__height + Pipe.GAP // 2

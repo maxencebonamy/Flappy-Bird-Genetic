@@ -27,16 +27,15 @@ class Player:
   
 		self.__screen_height = screen_height
 		self.__game = game
-	
-	def on_key_down(self, key):
-		if key == pygame.K_SPACE:
-			self.jump()
    
 	def collide(self, rect):
 		return self.__rect.colliderect(rect)
 
 	def get_position(self):
 		return self.__rect.center
+
+	def get_y_velocity(self):
+		return self.__y_velocity
 
 	def jump(self):
 		self.__y_velocity = Player.JUMP_STRENGTH

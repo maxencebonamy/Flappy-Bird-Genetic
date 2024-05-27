@@ -7,6 +7,7 @@ class World:
 	SPEED = 1
 	MIN_PIPE_GAP = 200
 	MAX_PIPE_GAP = 500
+	INITIAL_PIPES = 2
 	
 	def __init__(self, screen_width, screen_height):
 		self.__screen_width = screen_width
@@ -15,6 +16,8 @@ class World:
 		self.__background = Background(screen_width, screen_height, World.SPEED)
 		self.__pipes = []
 		self.__next_gap = self.__get_next_gap()
+  
+		self.__init_pipes()
 
 	def update(self):
 		self.__background.update()
@@ -25,7 +28,7 @@ class World:
 		self.__pipes = [pipe for pipe in self.__pipes if pipe.get_x() + pipe.get_width() > 0]
 
 		if len(self.__pipes) == 0 or self.__pipes[-1].get_x() < self.__screen_width - self.__next_gap:
-			self.__add_pipe()
+			self.__add_pipe(self.__screen_width)
 			self.__next_gap = self.__get_next_gap()
 
 	def draw(self, screen):
@@ -47,8 +50,21 @@ class World:
 				return True
 		return False
 
-	def __add_pipe(self):
-		new_pipe = Pipe(self.__screen_width, self.__screen_height, World.SPEED * 2)
+	def get_next_pipe(self):
+		for pipe in self.__pipes:
+			if not pipe.is_passed():
+				return pipe
+		return None
+
+	def __init_pipes(self):
+		self.__add_pipe(self.__screen_width // 2)
+		for i in range(World.INITIAL_PIPES - 1):
+			last_pipe = self.__pipes[-1]
+			self.__add_pipe(last_pipe.get_x() + last_pipe.get_width() + self.__next_gap)
+			self.__next_gap = self.__get_next_gap()
+
+	def __add_pipe(self, x):
+		new_pipe = Pipe(x, self.__screen_height, World.SPEED * 2)
 		self.__pipes.append(new_pipe)
 	
 	def __get_next_gap(self):
