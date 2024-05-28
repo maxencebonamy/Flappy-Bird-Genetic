@@ -1,0 +1,2 @@
+from genetic.genetic_algorithm import GeneticAlgorithm
+from genetic.neural_network import NeuralNetwork

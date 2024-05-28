@@ -4,7 +4,8 @@ import pygame
 
 class Pipe:
 
-	GAP = 200
+	MIN_GAP = 200
+	MAX_GAP = 300
 	IMAGE_PATH = "assets/pipe.png"
 	RESIZE_RATIO = 320 / 512
 
@@ -17,9 +18,10 @@ class Pipe:
 
 		self.__passed = False
 		self.__speed = speed
+		self.__gap = random.randint(Pipe.MIN_GAP, Pipe.MAX_GAP)
 		self.__x = screen_width
 		self.__y_top = random.randint(-300, -50)
-		self.__y_bottom = self.__y_top + self.__height + Pipe.GAP
+		self.__y_bottom = self.__y_top + self.__height + self.__gap
 
 	def update(self):
 		self.__x -= self.__speed
@@ -47,4 +49,7 @@ class Pipe:
 		return self.__width
 
 	def get_gap_center_y(self):
-		return self.__y_top + self.__height + Pipe.GAP // 2
+		return self.__y_top + self.__height + self.__gap // 2
+
+	def get_gap(self):
+		return self.__gap

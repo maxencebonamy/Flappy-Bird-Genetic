@@ -1,6 +1,11 @@
-from game import Game
+# from game import Game
 
-game = Game()
+# game = Game()
 
-while True:
-	game.update()
+# while True:
+# 	game.update()
+
+from genetic import GeneticAlgorithm
+
+algo = GeneticAlgorithm(1000)
+algo.train()

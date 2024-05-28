@@ -11,8 +11,8 @@ class Score:
 
 		self.__images = [resize_image_keep_aspect(Score.IMAGE_PATH.format(index=i), int(screen_height * Score.RESIZE_RATIO)) for i in range(10)]
 
-	def add(self, points):
-		self.__score += points
+	def increase(self):
+		self.__score += 1
 
 	def get(self):
 		return self.__score

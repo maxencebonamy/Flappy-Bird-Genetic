@@ -1,12 +1,13 @@
 from game.world.background import Background
 from game.world.pipe import Pipe
+from game.player import Player
 import random
 
 class World:
 
 	SPEED = 1
-	MIN_PIPE_GAP = 200
-	MAX_PIPE_GAP = 500
+	MIN_PIPE_GAP = 180
+	MAX_PIPE_GAP = 320
 	INITIAL_PIPES = 2
 	
 	def __init__(self, screen_width, screen_height):
@@ -43,9 +44,9 @@ class World:
 				return True
 		return False
 
-	def player_passed_pipe(self, player):
+	def players_passed_pipe(self):
 		for pipe in self.__pipes:
-			if pipe.get_x() + pipe.get_width() < player.get_position()[0] and not pipe.is_passed():
+			if pipe.get_x() + pipe.get_width() < Player.X_POSITION - 20 and not pipe.is_passed():
 				pipe.set_passed()
 				return True
 		return False
